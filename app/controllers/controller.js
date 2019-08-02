@@ -1,8 +1,7 @@
 
 
-var Product = require('./../models/product');
+var Transaction = require('../models/transactions');
 var request = require('request');
-var auth = 'Basic ' + Buffer.from("vaidya_rohan" + ':' + "Wiproce@12345").toString('base64');
 
 const Web3 = require('web3')
 const httpProvider = "https://kovan.infura.io/v3/6c6f87a10e12438f8fbb7fc7c762b37c"
@@ -10,7 +9,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider(httpProvider));
 
 exports.getBlock = (req,res) =>{
 //1757201
-    web3.eth.getTransactionFromBlock(1757201,1, function(error, result){
+    web3.eth.getTransactionCount("0xfe9e1006910ec7975c9bc2575e0f5b36bf26074da5a511e3bab664417a517cda",function(error, result){
             if(!error)
                 console.log(JSON.stringify(result));
             else
@@ -39,12 +38,33 @@ exports.getBlockLatest = (req, res) => {
 
                              
                             console.log(result2.number);
-                            web3.eth.getTransactionFromBlock(1757201,1, function(error3, result3){
-                                if(!error3)
-                                    console.log(JSON.stringify(result3));
+                          //  for(var i=0;i<10;i++){
+                                web3.eth.getTransactionFromBlock(1757201,2, function(error3, result3){
+                                    if(!error3){
+                                     console.log(JSON.stringify(result3));
+                                        // var data = new Transaction({
+        
+                                        // from: result3.from,
+                                        // to: result3.to,
+                                        // blockNumber: result3.blockNumber,
+                                        // transactionHash: result3.transactionHash,
+                                       
+                                        // })
+                                        // data.save()
+                                        //     .then(text => {
+                                        //         res.send(text);
+                                        //     })
+                                        //     .catch(err => {
+                                        //         res.status(500).send({
+                                        //             message: err.message
+                                        //         })
+                                        //     });
+                                }
+                                    
                                 else
                                     console.error(error3);
                              });
+                          //  }
                         }
                            // console.log(JSON.stringify(result2));
                         else
