@@ -4,7 +4,7 @@ module.exports = (app)=>{
 
 
     app.get('/getBlock',controller.getBlock);
-    app.post('/billingDetails',controller.billingDetails);
+    app.post('/getTransactions',controller.getTransactions);
     app.get('/getBlockLatest', controller.getBlockLatest);
 
     var cors = require('cors');
